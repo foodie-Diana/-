@@ -70,5 +70,14 @@ public interface EmploymentAnalysisMapper
     @MapKey("college_name")
     public List<Map<String, Object>> selectCollegeYearlyAvgSalaries();
 
+    /**
+     * 查询热门就业方向
+     *
+     * @return 各专业的就业人数
+     */
+    @MapKey("major_name")
+    public List<Map<String, Object>> selectPopularMajors();
+
+
 
 }

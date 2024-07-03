@@ -79,4 +79,14 @@ public class EmploymentAnalysisController extends BaseController
         return AjaxResult.success(data);
     }
 
+    /*AjaxResult 是一个封装 HTTP 响应结果的类*/
+    /**
+     * 获取热门就业方向
+     */
+    @GetMapping("/popularMajors")
+    public AjaxResult getPopularMajors() {
+        List<Map<String, Object>> data = employmentAnalysisService.getPopularMajors();
+        return AjaxResult.success(data);
+    }
+
 }

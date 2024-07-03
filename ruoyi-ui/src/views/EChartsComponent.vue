@@ -43,6 +43,14 @@ export default {
       const rawData = response.data;
       console.log("Raw data: ", rawData);
 
+      // 将后端数据转换为 ECharts 需要的格式
+      const formattedData = rawData.map(item => [
+        item.avg_salary,  // 索引 0
+        item.year,        // 索引 1
+        null,             // 保留空位 2
+        item.college_name // 索引 3
+      ]);
+
       const colleges = Array.from(new Set(rawData.map(item => item.college_name)));
       console.log("Colleges: ", colleges);
 
@@ -58,8 +66,8 @@ export default {
             type: 'filter',
             config: {
               and: [
-                { dimension: 'year', gte: 2000 },
-                { dimension: 'college_name', '=': college }
+                { dimension: 1, gte: 2000 },
+                { dimension: 3, '=': college }
               ]
             }
           }
@@ -72,9 +80,7 @@ export default {
           endLabel: {
             show: true,
             formatter: function (params) {
-              if (params.value && typeof params.value === 'object') {
-                return `${params.value.college_name}: ${params.value.avg_salary}`;
-              }
+              return params.value[3] + ': ' + params.value[0];
             }
           },
           labelLayout: {
@@ -84,11 +90,11 @@ export default {
             focus: 'series'
           },
           encode: {
-            x: 'year',
-            y: 'avg_salary',
-            label: ['college_name', 'avg_salary'],
-            itemName: 'year',
-            tooltip: ['avg_salary']
+            x: 1, // year
+            y: 0, // avg_salary
+            label: [3, 0], // [college_name, avg_salary]
+            itemName: 1, // year
+            tooltip: [0] // avg_salary
           }
         });
       });
@@ -96,11 +102,11 @@ export default {
       console.log("Series list: ", seriesList);
 
       const option = {
-        animationDuration: 7000,
+        animationDuration: 10000,
         dataset: [
           {
             id: 'dataset_raw',
-            source: rawData
+            source: formattedData
           },
           ...datasetWithFilters
         ],

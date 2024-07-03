@@ -7,13 +7,22 @@
     </el-row>
     <el-row :gutter="20">
       <el-col :sm="24" :lg="12" style="padding-left: 20px">
+
         <h2>高校就业分析平台</h2>
         <!-- ECharts 图表 -->
         <div id="main" style="width: 100%; height: 400px;">
           <EChartsComponent />
         </div>
+
         <p>
           <el-tag type="danger">&yen;免费开源</el-tag>
+        </p>
+        <p>
+          <!-- ECharts 图表 -->
+          <h2>热门就业方向</h2>
+          <div id="popularMajorsChart" style="width: 100%; height: 400px;">
+            <PopularMajorsChart />
+          </div>
         </p>
         <p>
           <el-button
@@ -21,8 +30,8 @@
             size="mini"
             icon="el-icon-cloudy"
             plain
-            @click="goTarget('https://gitee.com/y_project/RuoYi-Vue')"
-            >访问码云</el-button
+            @click="goTarget('https://gitee.com/foodie_diana/stephen-planning-bureau')"
+            >项目源码</el-button
           >
           <el-button
             size="mini"
@@ -81,14 +90,14 @@
 </template>
 
 <script>
-import { listEmployment_analysis, getEmployment_analysis, delEmployment_analysis, addEmployment_analysis, updateEmployment_analysis, getCollegeYearlyAvgSalaries } from "@/api/employment/employment_analysis";
 import EChartsComponent from './EChartsComponent.vue';
-
+import PopularMajorsChart from './PopularMajorsChart.vue';
 
 export default {
   name: "Index",
   components: {
-    EChartsComponent
+    EChartsComponent,
+    PopularMajorsChart,
   },
   data() {
     return {
@@ -96,100 +105,11 @@ export default {
     };
   },
   created() {
-    this.initChart();
+    // Initialize charts if needed here
   },
   methods: {
     goTarget(href) {
       window.open(href, "_blank");
-    },
-    async initChart() {
-      console.log("Initializing chart...");
-
-      const myChart = this.$echarts.init(document.getElementById('main'));
-
-      console.log("Fetching data...");
-      const response = await getCollegeYearlyAvgSalaries();
-      console.log("Data fetched: ", response.data);
-
-      const rawData = response.data;
-
-      // 处理数据
-      const colleges = Array.from(new Set(rawData.map(item => item.college_name)));
-      const datasetWithFilters = [];
-      const seriesList = [];
-
-      colleges.forEach(college => {
-        const datasetId = 'dataset_' + college;
-        datasetWithFilters.push({
-          id: datasetId,
-          fromDatasetId: 'dataset_raw',
-          transform: {
-            type: 'filter',
-            config: {
-              and: [
-                { dimension: 'year', gte: 1950 },
-                { dimension: 'college_name', '=': college }
-              ]
-            }
-          }
-        });
-        seriesList.push({
-          type: 'line',
-          datasetId: datasetId,
-          showSymbol: false,
-          name: college,
-          endLabel: {
-            show: true,
-            formatter: function (params) {
-              return params.value[2] + ': ' + params.value[1];
-            }
-          },
-          labelLayout: {
-            moveOverlap: 'shiftY'
-          },
-          emphasis: {
-            focus: 'series'
-          },
-          encode: {
-            x: 'year',
-            y: 'avg_salary',
-            label: ['college_name', 'avg_salary'],
-            itemName: 'year',
-            tooltip: ['avg_salary']
-          }
-        });
-      });
-
-      const option = {
-        animationDuration: 10000,
-        dataset: [
-          {
-            id: 'dataset_raw',
-            source: rawData
-          },
-          ...datasetWithFilters
-        ],
-        title: {
-          text: '各院校历年平均薪资'
-        },
-        tooltip: {
-          order: 'valueDesc',
-          trigger: 'axis'
-        },
-        xAxis: {
-          type: 'category',
-          nameLocation: 'middle'
-        },
-        yAxis: {
-          name: '平均薪资'
-        },
-        grid: {
-          right: 140
-        },
-        series: seriesList
-      };
-
-      myChart.setOption(option);
     }
   }
 };

@@ -67,3 +67,12 @@ export function getCollegeYearlyAvgSalaries() {
   })
 }
 
+//热门就业方向
+export function getPopularMajors() {
+  return request({
+    url: '/employment/employment_analysis/popularMajors',
+    method: 'get'
+  });
+}
+
+

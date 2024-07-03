@@ -35,4 +35,8 @@ public interface IEmploymentAnalysisService
     public List<Map<String, Object>> getCollegeYearlyAvgSalaries();
 
 
+    public List<Map<String, Object>> getPopularMajors();
+
+
+
 }

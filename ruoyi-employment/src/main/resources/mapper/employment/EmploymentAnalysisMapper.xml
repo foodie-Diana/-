@@ -96,7 +96,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT college_name, year, AVG(salary) as avg_salary
         FROM employment_data
         GROUP BY college_name, year
-        ORDER BY college_name, year
+        ORDER BY year ASC;
     </select>
+
+    <!-- 查询热门就业方向 -->
+    <select id="selectPopularMajors" resultType="java.util.Map">
+        SELECT major_name, COUNT(*) as major_count
+        FROM employment_sort
+        GROUP BY major_name
+        ORDER BY major_count DESC
+    </select>
+
 
 </mapper>

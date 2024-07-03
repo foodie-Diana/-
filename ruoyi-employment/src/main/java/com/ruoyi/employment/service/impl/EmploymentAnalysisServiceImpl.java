@@ -45,11 +45,18 @@ public class EmploymentAnalysisServiceImpl implements IEmploymentAnalysisService
         return employmentAnalysisMapper.selectEmploymentAnalysisList(employmentAnalysis);
     }
 
-    // 其他方法省略
+
 
     @Override
     public List<Map<String, Object>> getCollegeYearlyAvgSalaries() {
         return employmentAnalysisMapper.selectCollegeYearlyAvgSalaries();
     }
+
+    @Override
+    public List<Map<String, Object>> getPopularMajors() {
+        return employmentAnalysisMapper.selectPopularMajors();
+    }
+
+
 
 }
