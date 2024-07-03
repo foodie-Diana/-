@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.employment.mapper.DepartmentsStudentsMapper">
+    
+    <resultMap type="DepartmentsStudents" id="DepartmentsStudentsResult">
+        <result property="id"    column="id"    />
+        <result property="collegeId"    column="college_id"    />
+        <result property="collegeName"    column="college_name"    />
+        <result property="departmentId"    column="department_id"    />
+        <result property="departmentName"    column="department_name"    />
+        <result property="majorId"    column="major_id"    />
+        <result property="majorName"    column="major_name"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="studentName"    column="student_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="dateOfBirth"    column="date_of_birth"    />
+        <result property="enrollmentYear"    column="enrollment_year"    />
+    </resultMap>
+
+    <resultMap id="DepartmentsStudentsEmploymentInfoResult" type="DepartmentsStudents" extends="DepartmentsStudentsResult">
+        <collection property="employmentInfoList" ofType="EmploymentInfo" column="id" select="selectEmploymentInfoList" />
+    </resultMap>
+
+    <resultMap type="EmploymentInfo" id="EmploymentInfoResult">
+        <result property="employmentId"    column="employment_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="position"    column="position"    />
+        <result property="salary"    column="salary"    />
+        <result property="employmentDate"    column="employment_date"    />
+        <result property="location"    column="location"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectDepartmentsStudentsVo">
+        select id, college_id, college_name, department_id, department_name, major_id, major_name, student_id, student_name, gender, date_of_birth, enrollment_year from departments_students
+    </sql>
+
+    <select id="selectDepartmentsStudentsList" parameterType="DepartmentsStudents" resultMap="DepartmentsStudentsResult">
+        <include refid="selectDepartmentsStudentsVo"/>
+        <where>  
+            <if test="collegeId != null "> and college_id = #{collegeId}</if>
+            <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
+            <if test="departmentId != null "> and department_id = #{departmentId}</if>
+            <if test="departmentName != null  and departmentName != ''"> and department_name like concat('%', #{departmentName}, '%')</if>
+            <if test="majorId != null "> and major_id = #{majorId}</if>
+            <if test="majorName != null  and majorName != ''"> and major_name like concat('%', #{majorName}, '%')</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="studentName != null  and studentName != ''"> and student_name like concat('%', #{studentName}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="dateOfBirth != null "> and date_of_birth = #{dateOfBirth}</if>
+            <if test="enrollmentYear != null  and enrollmentYear != ''"> and enrollment_year = #{enrollmentYear}</if>
+        </where>
+    </select>
+    
+    <select id="selectDepartmentsStudentsById" parameterType="Long" resultMap="DepartmentsStudentsEmploymentInfoResult">
+        select id, college_id, college_name, department_id, department_name, major_id, major_name, student_id, student_name, gender, date_of_birth, enrollment_year
+        from departments_students
+        where id = #{id}
+    </select>
+
+    <select id="selectEmploymentInfoList" resultType="EmploymentInfo" resultMap="EmploymentInfoResult">
+        select employment_id, student_id, company_name, position, salary, employment_date, location, status
+        from employment_info
+        where student_id = #{student_id}
+    </select>
+
+    <insert id="insertDepartmentsStudents" parameterType="DepartmentsStudents" useGeneratedKeys="true" keyProperty="id">
+        insert into departments_students
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collegeId != null">college_id,</if>
+            <if test="collegeName != null and collegeName != ''">college_name,</if>
+            <if test="departmentId != null">department_id,</if>
+            <if test="departmentName != null and departmentName != ''">department_name,</if>
+            <if test="majorId != null">major_id,</if>
+            <if test="majorName != null and majorName != ''">major_name,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="studentName != null and studentName != ''">student_name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="dateOfBirth != null">date_of_birth,</if>
+            <if test="enrollmentYear != null">enrollment_year,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collegeId != null">#{collegeId},</if>
+            <if test="collegeName != null and collegeName != ''">#{collegeName},</if>
+            <if test="departmentId != null">#{departmentId},</if>
+            <if test="departmentName != null and departmentName != ''">#{departmentName},</if>
+            <if test="majorId != null">#{majorId},</if>
+            <if test="majorName != null and majorName != ''">#{majorName},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="studentName != null and studentName != ''">#{studentName},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="dateOfBirth != null">#{dateOfBirth},</if>
+            <if test="enrollmentYear != null">#{enrollmentYear},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDepartmentsStudents" parameterType="DepartmentsStudents">
+        update departments_students
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="collegeId != null">college_id = #{collegeId},</if>
+            <if test="collegeName != null and collegeName != ''">college_name = #{collegeName},</if>
+            <if test="departmentId != null">department_id = #{departmentId},</if>
+            <if test="departmentName != null and departmentName != ''">department_name = #{departmentName},</if>
+            <if test="majorId != null">major_id = #{majorId},</if>
+            <if test="majorName != null and majorName != ''">major_name = #{majorName},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="studentName != null and studentName != ''">student_name = #{studentName},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="dateOfBirth != null">date_of_birth = #{dateOfBirth},</if>
+            <if test="enrollmentYear != null">enrollment_year = #{enrollmentYear},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDepartmentsStudentsById" parameterType="Long">
+        delete from departments_students where id = #{id}
+    </delete>
+
+    <delete id="deleteDepartmentsStudentsByIds" parameterType="String">
+        delete from departments_students where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteEmploymentInfoByStudentIds" parameterType="String">
+        delete from employment_info where student_id in 
+        <foreach item="studentId" collection="array" open="(" separator="," close=")">
+            #{studentId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteEmploymentInfoByStudentId" parameterType="Long">
+        delete from employment_info where student_id = #{studentId}
+    </delete>
+
+    <insert id="batchEmploymentInfo">
+        insert into employment_info( employment_id, student_id, company_name, position, salary, employment_date, location, status) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.employmentId}, #{item.studentId}, #{item.companyName}, #{item.position}, #{item.salary}, #{item.employmentDate}, #{item.location}, #{item.status})
+        </foreach>
+    </insert>
+</mapper>

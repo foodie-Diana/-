@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.employment.mapper.EmploymentAnalysisMapper">
+    
+    <resultMap type="EmploymentAnalysis" id="EmploymentAnalysisResult">
+        <result property="analysisId"    column="analysis_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="collegeName"    column="college_name"    />
+        <result property="departmentName"    column="department_name"    />
+        <result property="majorName"    column="major_name"    />
+        <result property="gender"    column="gender"    />
+        <result property="employmentDate"    column="employment_date"    />
+        <result property="salary"    column="salary"    />
+        <result property="location"    column="location"    />
+    </resultMap>
+
+    <sql id="selectEmploymentAnalysisVo">
+        select analysis_id, student_id, college_name, department_name, major_name, gender, employment_date, salary, location from employment_analysis
+    </sql>
+
+    <select id="selectEmploymentAnalysisList" parameterType="EmploymentAnalysis" resultMap="EmploymentAnalysisResult">
+        <include refid="selectEmploymentAnalysisVo"/>
+        <where>  
+            <if test="analysisId != null "> and analysis_id = #{analysisId}</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
+            <if test="departmentName != null  and departmentName != ''"> and department_name like concat('%', #{departmentName}, '%')</if>
+            <if test="majorName != null  and majorName != ''"> and major_name like concat('%', #{majorName}, '%')</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="employmentDate != null "> and employment_date = #{employmentDate}</if>
+            <if test="salary != null "> and salary = #{salary}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+        </where>
+    </select>
+    
+    <select id="selectEmploymentAnalysisByAnalysisId" parameterType="Long" resultMap="EmploymentAnalysisResult">
+        <include refid="selectEmploymentAnalysisVo"/>
+        where analysis_id = #{analysisId}
+    </select>
+
+    <insert id="insertEmploymentAnalysis" parameterType="EmploymentAnalysis" useGeneratedKeys="true" keyProperty="analysisId">
+        insert into employment_analysis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_id,</if>
+            <if test="collegeName != null and collegeName != ''">college_name,</if>
+            <if test="departmentName != null and departmentName != ''">department_name,</if>
+            <if test="majorName != null and majorName != ''">major_name,</if>
+            <if test="gender != null">gender,</if>
+            <if test="employmentDate != null">employment_date,</if>
+            <if test="salary != null">salary,</if>
+            <if test="location != null">location,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="collegeName != null and collegeName != ''">#{collegeName},</if>
+            <if test="departmentName != null and departmentName != ''">#{departmentName},</if>
+            <if test="majorName != null and majorName != ''">#{majorName},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="employmentDate != null">#{employmentDate},</if>
+            <if test="salary != null">#{salary},</if>
+            <if test="location != null">#{location},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEmploymentAnalysis" parameterType="EmploymentAnalysis">
+        update employment_analysis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="collegeName != null and collegeName != ''">college_name = #{collegeName},</if>
+            <if test="departmentName != null and departmentName != ''">department_name = #{departmentName},</if>
+            <if test="majorName != null and majorName != ''">major_name = #{majorName},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="employmentDate != null">employment_date = #{employmentDate},</if>
+            <if test="salary != null">salary = #{salary},</if>
+            <if test="location != null">location = #{location},</if>
+        </trim>
+        where analysis_id = #{analysisId}
+    </update>
+
+    <delete id="deleteEmploymentAnalysisByAnalysisId" parameterType="Long">
+        delete from employment_analysis where analysis_id = #{analysisId}
+    </delete>
+
+    <delete id="deleteEmploymentAnalysisByAnalysisIds" parameterType="String">
+        delete from employment_analysis where analysis_id in 
+        <foreach item="analysisId" collection="array" open="(" separator="," close=")">
+            #{analysisId}
+        </foreach>
+    </delete>
+
+
+    <!-- 查询各院校历年平均薪资 -->
+    <select id="selectCollegeYearlyAvgSalaries" resultType="java.util.Map">
+        SELECT college_name, year, AVG(salary) as avg_salary
+        FROM employment_data
+        GROUP BY college_name, year
+        ORDER BY college_name, year
+    </select>
+
+</mapper>

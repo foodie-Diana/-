@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mes.mapper.MesProjectMapper">
+
+   <!-- CREATE TABLE `mes_project_maintenance` (
+    `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '项目维护id',
+    `project_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '项目名',
+    `project_header` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '负责人',
+    `start_date` datetime DEFAULT NULL COMMENT '开始日期',
+    `end_date` datetime DEFAULT NULL COMMENT '结束日期',
+    `status` int DEFAULT NULL COMMENT '项目状态 0：挂起 1：正常',
+    `introduce` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '项目介绍',
+    PRIMARY KEY (`id`) USING BTREE
+    ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='制造执行MES-项目维护表';
+    INSERT INTO `mes_project_maintenance` VALUES (5,'2022-05生产项目','斯蒂芬','2022-05-24 00:00:00','2023-05-06 00:00:00',1,NULL),(6,'2022-06生产项目','勒布朗','2022-06-14 00:00:00','2023-05-31 00:00:00',1,NULL),(9,'2022-07生产项目','凯文','2022-07-01 00:00:00','2023-07-01 00:00:00',1,NULL),(13,'2022-08生产项目','凯里','2022-08-01 00:00:00','2023-08-01 00:00:00',1,NULL),(14,'2022-09生产项目','德里克','2022-09-01 00:00:00','2023-09-01 00:00:00',1,NULL),(15,'2022-10生产项目','德克','2022-10-01 00:00:00','2023-10-01 00:00:00',1,NULL),(16,'2023-05生产项目','贾森','2023-05-01 00:00:00','2024-05-01 00:00:00',1,NULL),(17,'2023-06生产项目','克里斯','2023-06-01 00:00:00','2023-08-01 00:00:00',1,NULL),(18,'2023-07生产项目','扬尼斯','2023-07-13 00:00:00','2024-08-01 00:00:00',1,NULL),(19,'2023-08生产项目','乔尔','2023-08-01 00:00:00','2024-08-01 00:00:00',1,NULL),(20,'2023-09生产项目','尼古拉','2023-09-01 00:00:00','2024-09-01 00:00:00',1,NULL),(21,'2023-10生产项目','贾马尔','2023-10-01 00:00:00','2024-08-31 00:00:00',1,NULL),(22,'2022-11生产项目','克里斯','2022-11-01 00:00:00','2022-11-30 00:00:00',1,NULL),(23,'2022-12生产项目','安吉','2022-12-01 00:00:00','2022-12-31 00:00:00',1,NULL),(24,'2023-01生产项目','瑞安','2023-01-01 00:00:00','2023-01-31 00:00:00',1,NULL),(25,'2023-02生产项目','安吉洛','2023-02-01 00:00:00','2023-02-28 00:00:00',1,NULL),(26,'2023-03生产项目','德里克','2023-03-01 00:00:00','2023-03-31 00:00:00',1,NULL),(27,'2023-04生产项目','拉塞尔','2023-04-01 00:00:00','2023-04-30 00:00:00',1,NULL);
+-->
+
+
+</mapper>
