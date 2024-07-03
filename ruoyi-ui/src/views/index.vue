@@ -2,19 +2,16 @@
   <div class="app-container home">
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
-
         <hr />
       </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col :sm="24" :lg="12" style="padding-left: 20px">
-        <h2>若依后台管理框架</h2>
-        <p>
-          一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了若依管理系统，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
-        </p>
-        <p>
-          <b>当前版本:</b> <span>v{{ version }}</span>
-        </p>
+        <h2>高校就业分析平台</h2>
+        <!-- ECharts 图表 -->
+        <div id="main" style="width: 100%; height: 400px;">
+          <EChartsComponent />
+        </div>
         <p>
           <el-tag type="danger">&yen;免费开源</el-tag>
         </p>
@@ -36,7 +33,6 @@
           >
         </p>
       </el-col>
-
       <el-col :sm="24" :lg="12" style="padding-left: 50px">
         <el-row>
           <el-col :span="12">
@@ -85,17 +81,115 @@
 </template>
 
 <script>
+import { listEmployment_analysis, getEmployment_analysis, delEmployment_analysis, addEmployment_analysis, updateEmployment_analysis, getCollegeYearlyAvgSalaries } from "@/api/employment/employment_analysis";
+import EChartsComponent from './EChartsComponent.vue';
+
+
 export default {
   name: "Index",
+  components: {
+    EChartsComponent
+  },
   data() {
     return {
-      // 版本号
       version: "3.8.7"
     };
+  },
+  created() {
+    this.initChart();
   },
   methods: {
     goTarget(href) {
       window.open(href, "_blank");
+    },
+    async initChart() {
+      console.log("Initializing chart...");
+
+      const myChart = this.$echarts.init(document.getElementById('main'));
+
+      console.log("Fetching data...");
+      const response = await getCollegeYearlyAvgSalaries();
+      console.log("Data fetched: ", response.data);
+
+      const rawData = response.data;
+
+      // 处理数据
+      const colleges = Array.from(new Set(rawData.map(item => item.college_name)));
+      const datasetWithFilters = [];
+      const seriesList = [];
+
+      colleges.forEach(college => {
+        const datasetId = 'dataset_' + college;
+        datasetWithFilters.push({
+          id: datasetId,
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'year', gte: 1950 },
+                { dimension: 'college_name', '=': college }
+              ]
+            }
+          }
+        });
+        seriesList.push({
+          type: 'line',
+          datasetId: datasetId,
+          showSymbol: false,
+          name: college,
+          endLabel: {
+            show: true,
+            formatter: function (params) {
+              return params.value[2] + ': ' + params.value[1];
+            }
+          },
+          labelLayout: {
+            moveOverlap: 'shiftY'
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          encode: {
+            x: 'year',
+            y: 'avg_salary',
+            label: ['college_name', 'avg_salary'],
+            itemName: 'year',
+            tooltip: ['avg_salary']
+          }
+        });
+      });
+
+      const option = {
+        animationDuration: 10000,
+        dataset: [
+          {
+            id: 'dataset_raw',
+            source: rawData
+          },
+          ...datasetWithFilters
+        ],
+        title: {
+          text: '各院校历年平均薪资'
+        },
+        tooltip: {
+          order: 'valueDesc',
+          trigger: 'axis'
+        },
+        xAxis: {
+          type: 'category',
+          nameLocation: 'middle'
+        },
+        yAxis: {
+          name: '平均薪资'
+        },
+        grid: {
+          right: 140
+        },
+        series: seriesList
+      };
+
+      myChart.setOption(option);
     }
   }
 };
@@ -164,4 +258,3 @@ export default {
   }
 }
 </style>
-

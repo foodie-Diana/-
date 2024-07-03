@@ -22,5 +22,5 @@ export function getCollegeYearlyAvgSalaries() {
   return request({
     url: '/employment/employment_analysis/collegeYearlyAvgSalaries',
     method: 'get'
-  });
+  })
 }

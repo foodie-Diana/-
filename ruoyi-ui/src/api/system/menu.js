@@ -58,3 +58,12 @@ export function delMenu(menuId) {
     method: 'delete'
   })
 }
+
+// 查询院校历年平均薪资
+export function getCollegeYearlyAvgSalaries() {
+  return request({
+    url: '/employment/employment_analysis/collegeYearlyAvgSalaries',
+    method: 'get'
+  })
+}
+
