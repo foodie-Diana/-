@@ -24,6 +24,15 @@
             <PopularMajorsChart />
           </div>
         </p>
+
+        <p>
+          <!-- ECharts 图表 -->
+          <h2>热门就业方向</h2>
+          <div id="EchartsMap">
+            <EchartsMap />
+          </div>
+        </p>
+
         <p>
           <el-button
             type="primary"
@@ -92,12 +101,14 @@
 <script>
 import EChartsComponent from './EChartsComponent.vue';
 import PopularMajorsChart from './PopularMajorsChart.vue';
+import EchartsMap from './EchartsMap.vue';
 
 export default {
   name: "Index",
   components: {
     EChartsComponent,
     PopularMajorsChart,
+    EchartsMap
   },
   data() {
     return {
