@@ -5,105 +5,104 @@
 </template>
 
 <script>
-import * as echarts from 'echarts'
-import china from './china.json'
+import * as echarts from 'echarts';
+import china from './china.json';
+import { getPopularProvinces } from '@/api/menu'; // 假设你的接口文件路径为 @/api
 
 export default {
-  data () {
+  data() {
     return {
-      // 散点图数据
-      points: [
-        { name: '北京', value: [116.407387, 39.904179], itemStyle: { color: '#FF5733' } },
-        { name: '天津', value: [117.199371, 39.0851], itemStyle: { color: '#007BFF' } },
-        { name: '河北', value: [114.502461, 38.045474], itemStyle: { color: '#007BFF' } },
-        { name: '山西', value: [112.578781, 37.813948], itemStyle: { color: '#007BFF' } },
-        { name: '内蒙古', value: [111.670801, 40.818311], itemStyle: { color: '#007BFF' } },
-        { name: '辽宁', value: [123.429096, 41.796767], itemStyle: { color: '#007BFF' } },
-        { name: '吉林', value: [125.3245, 43.886841], itemStyle: { color: '#007BFF' } },
-        { name: '黑龙江', value: [126.642464, 45.756967], itemStyle: { color: '#007BFF' } },
-        { name: '上海', value: [121.473701, 31.230416], itemStyle: { color: '#007BFF' } },
-        { name: '江苏', value: [118.763563, 32.061377], itemStyle: { color: '#007BFF' } },
-        { name: '浙江', value: [120.152575, 30.266619], itemStyle: { color: '#007BFF' } },
-        { name: '安徽', value: [117.283042, 31.86119], itemStyle: { color: '#007BFF' } },
-        { name: '福建', value: [119.306239, 26.075302], itemStyle: { color: '#007BFF' } },
-        { name: '江西', value: [115.892151, 28.676493], itemStyle: { color: '#007BFF' } },
-        { name: '山东', value: [117.020725, 36.670201], itemStyle: { color: '#007BFF' } },
-        { name: '河南', value: [113.753094, 34.767052], itemStyle: { color: '#007BFF' } },
-        { name: '湖北', value: [114.298572, 30.584355], itemStyle: { color: '#007BFF' } },
-        { name: '湖南', value: [112.982951, 28.116007], itemStyle: { color: '#007BFF' } },
-        { name: '广东', value: [113.266887, 23.133306], itemStyle: { color: '#007BFF' } },
-        { name: '广西', value: [108.327537, 22.816659], itemStyle: { color: '#007BFF' } },
-        { name: '海南', value: [110.33119, 20.031971], itemStyle: { color: '#007BFF' } },
-        { name: '重庆', value: [106.504962, 29.533155], itemStyle: { color: '#007BFF' } },
-        { name: '四川', value: [104.065735, 30.659462], itemStyle: { color: '#007BFF' } },
-        { name: '贵州', value: [106.713478, 26.578343], itemStyle: { color: '#007BFF' } },
-        { name: '云南', value: [102.712251, 25.040609], itemStyle: { color: '#007BFF' } },
-        { name: '西藏', value: [91.132212, 29.660361], itemStyle: { color: '#007BFF' } },
-        { name: '陕西', value: [108.953939, 34.266611], itemStyle: { color: '#007BFF' } },
-        { name: '甘肃', value: [103.826777, 36.060634], itemStyle: { color: '#007BFF' } },
-        { name: '青海', value: [101.778916, 36.623178], itemStyle: { color: '#007BFF' } },
-        { name: '宁夏', value: [106.278179, 38.46637], itemStyle: { color: '#007BFF' } },
-        { name: '新疆', value: [87.628579, 43.793301], itemStyle: { color: '#007BFF' } }
-      ],
+      points: [],
       linesData: [],
-      mapData: [
-        { name: '北京', value: 500 },
-        { name: '天津', value: 200 },
-        { name: '河北', value: 300 },
-        { name: '山西', value: 150 },
-        { name: '内蒙古', value: 100 },
-        { name: '辽宁', value: 200 },
-        { name: '吉林', value: 150 },
-        { name: '黑龙江', value: 200 },
-        { name: '上海', value: 300 },
-        { name: '江苏', value: 310 },
-        { name: '浙江', value: 290 },
-        { name: '安徽', value: 170 },
-        { name: '福建', value: 220 },
-        { name: '江西', value: 180 },
-        { name: '山东', value: 300 },
-        { name: '河南', value: 260 },
-        { name: '湖北', value: 240 },
-        { name: '湖南', value: 210 },
-        { name: '广东', value: 450 },
-        { name: '广西', value: 180 },
-        { name: '海南', value: 120 },
-        { name: '重庆', value: 230 },
-        { name: '四川', value: 200 },
-        { name: '贵州', value: 150 },
-        { name: '云南', value: 120 },
-        { name: '西藏', value: 80 },
-        { name: '陕西', value: 240 },
-        { name: '甘肃', value: 150 },
-        { name: '青海', value: 100 },
-        { name: '宁夏', value: 80 },
-        { name: '新疆', value: 100 }
-      ],
+      mapData: [],
       planePath: 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z'
-    }
+    };
   },
-  mounted () {
-    this.generateRandomLines()
-    this.initCharts()
+  mounted() {
+    this.fetchDataAndInitCharts();
   },
   methods: {
-    generateRandomLines () {
-      const points = this.points.map(point => point.value)
-      const lines = []
+    async fetchDataAndInitCharts() {
+      try {
+        const response = await getPopularProvinces();
+        const data = response.data;
+
+        const validProvinces = this.getCoordinates();
+
+        // 过滤掉无效的省份数据
+        const validData = data.filter(item => validProvinces[item.location]);
+
+        this.mapData = validData.map(item => ({
+          value: item.count,
+          name: item.location
+
+        }));
+
+        this.points = validData.map(item => ({
+          name: item.location,
+          value: validProvinces[item.location],
+          itemStyle: { color: '#007BFF' }
+        }));
+
+        this.generateRandomLines();
+        this.initCharts();
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    },
+    getCoordinates() {
+      return {
+        '北京': [116.407387, 39.904179],
+        '天津': [117.199371, 39.0851],
+        '河北': [114.502461, 38.045474],
+        '山西': [112.578781, 37.813948],
+        '内蒙古': [111.670801, 40.818311],
+        '辽宁': [123.429096, 41.796767],
+        '吉林': [125.3245, 43.886841],
+        '黑龙江': [126.642464, 45.756967],
+        '上海': [121.473701, 31.230416],
+        '江苏': [118.763563, 32.061377],
+        '浙江': [120.152575, 30.266619],
+        '安徽': [117.283042, 31.86119],
+        '福建': [119.306239, 26.075302],
+        '江西': [115.892151, 28.676493],
+        '山东': [117.020725, 36.670201],
+        '河南': [113.753094, 34.767052],
+        '湖北': [114.298572, 30.584355],
+        '湖南': [112.982951, 28.116007],
+        '广东': [113.266887, 23.133306],
+        '广西': [108.327537, 22.816659],
+        '海南': [110.33119, 20.031971],
+        '重庆': [106.504962, 29.533155],
+        '四川': [104.065735, 30.659462],
+        '贵州': [106.713478, 26.578343],
+        '云南': [102.712251, 25.040609],
+        '西藏': [91.132212, 29.660361],
+        '陕西': [108.953939, 34.266611],
+        '甘肃': [103.826777, 36.060634],
+        '青海': [101.778916, 36.623178],
+        '宁夏': [106.278179, 38.46637],
+        '新疆': [87.628579, 43.793301]
+      };
+    },
+    generateRandomLines() {
+      const points = this.points.map(point => point.value);
+      const lines = [];
 
       for (let i = 0; i < points.length; i++) {
-        const from = points[i]
-        let to
+        const from = points[i];
+        let to;
         do {
-          to = points[Math.floor(Math.random() * points.length)]
-        } while (from === to)
-        lines.push({ coords: [from, to] })
+          to = points[Math.floor(Math.random() * points.length)];
+        } while (from === to);
+
+        lines.push({ coords: [from, to] });
       }
 
-      this.linesData = lines
+      this.linesData = lines;
     },
-    initCharts () {
-      const charts = echarts.init(this.$refs['charts'])
+    initCharts() {
+      const charts = echarts.init(this.$refs['charts']);
       const option = {
         backgroundColor: '#f0f8ff', // 浅蓝色背景颜色
         tooltip: {
@@ -112,16 +111,16 @@ export default {
             if (params.seriesType === 'map') {
               // 只在地图区域显示人数
               if (params.data && params.data.value) {
-                return `${params.name}: ${params.data.value} 人`
+                return `${params.name}: ${params.data.value} 人`;
               } else {
-                return `${params.name}`
+                return `${params.name}`;
               }
             } else if (params.seriesType === 'effectScatter') {
               // 散点图部分的提示信息
-              return `${params.name}: ${params.value[0]}, ${params.value[1]}`
+              return `${params.name}: ${params.value[0]}, ${params.value[1]}`;
             } else {
               // 线条部分的提示信息
-              return `${params.name}`
+              return `${params.name}`;
             }
           }
         },
@@ -215,14 +214,14 @@ export default {
             data: this.linesData
           }
         ]
-      }
+      };
 
       // 地图注册，第一个参数的名字必须和option.geo.map一致
-      echarts.registerMap('china', china)
-      charts.setOption(option)
+      echarts.registerMap('china', china);
+      charts.setOption(option);
     }
   }
-}
+};
 </script>
 
 <style scoped>
