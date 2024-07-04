@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="main" style="width: 100%; height: 400px;"></div>
+    <div id="EChartsComponent" style="width: 100%; height: 400px;"></div>
   </div>
 </template>
 

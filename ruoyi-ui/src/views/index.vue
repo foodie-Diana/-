@@ -20,7 +20,7 @@
         <p>
           <!-- ECharts 图表 -->
           <h2>热门就业方向</h2>
-          <div id="popularMajorsChart" style="width: 100%; height: 400px;">
+          <div id="popular-majors-chart" style="width: 100%; height: 400px;">
             <PopularMajorsChart />
           </div>
         </p>
@@ -28,8 +28,16 @@
         <p>
           <!-- ECharts 图表 -->
           <h2>热门就业方向</h2>
-          <div id="EchartsMap">
+          <div id="echarts-map">
             <EchartsMap />
+          </div>
+        </p>
+
+        <p>
+          <!-- ECharts 图表 -->
+          <h2>各省份就业人数</h2>
+          <div id="popular-provinces-chart-container" style="width: 100%; height: 400px;">
+            <PopularProvincesChart />
           </div>
         </p>
 
@@ -102,13 +110,15 @@
 import EChartsComponent from './EChartsComponent.vue';
 import PopularMajorsChart from './PopularMajorsChart.vue';
 import EchartsMap from './EchartsMap.vue';
+import PopularProvincesChart from './PopularProvincesChart.vue';
 
 export default {
   name: "Index",
   components: {
     EChartsComponent,
     PopularMajorsChart,
-    EchartsMap
+    EchartsMap,
+    PopularProvincesChart
   },
   data() {
     return {

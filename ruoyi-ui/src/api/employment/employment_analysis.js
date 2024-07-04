@@ -32,3 +32,11 @@ export function getPopularMajors() {
     method: 'get'
   });
 }
+
+//热门就业省份
+export function getPopularProvinces() {
+  return request({
+    url: '/employment/employment_analysis/popularProvinces',
+    method: 'get'
+  });
+}

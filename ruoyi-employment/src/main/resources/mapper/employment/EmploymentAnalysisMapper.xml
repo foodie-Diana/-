@@ -112,7 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT location, COUNT(*) as count
         FROM employment_analysis
         GROUP BY location
-        ORDER BY count DESC
+        ORDER BY count ASC
     </select>
 
 

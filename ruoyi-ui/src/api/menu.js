@@ -18,7 +18,7 @@ export function getCollegeYearlyAvgSalaries() {
 
 export function getPopularProvinces() {
   return request({
-    url: '/employment/analysis/popularProvinces',
+    url: '/employment/employment_analysis/popularProvinces',
     method: 'get'
   });
 }
