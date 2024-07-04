@@ -44,6 +44,10 @@ export default {
       console.log("Raw data: ", rawData);
 
       // 仅取前6个省份及其就业人数
+      rawData = rawData.slice(0, 6);
+
+
+      // 仅取前6个省份及其就业人数
 
       const provinces = rawData.map(item => item.location);
       const counts = rawData.map(item => item.count);

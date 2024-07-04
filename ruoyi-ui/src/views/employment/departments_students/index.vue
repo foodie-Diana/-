@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+      <!-- 其他表单项 -->
       <el-form-item label="高校ID" prop="collegeId">
         <el-input
           v-model="queryParams.collegeId"
@@ -80,6 +81,14 @@
           value-format="yyyy-MM-dd"
           placeholder="请选择出生日期">
         </el-date-picker>
+      </el-form-item>
+      <el-form-item label="入学年份" prop="enrollmentYear">
+        <el-input
+          v-model="queryParams.enrollmentYear"
+          placeholder="请输入入学年份"
+          clearable
+          @keyup.enter.native="handleQuery"
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -170,7 +179,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -216,6 +225,9 @@
             value-format="yyyy-MM-dd"
             placeholder="请选择出生日期">
           </el-date-picker>
+        </el-form-item>
+        <el-form-item label="入学年份" prop="enrollmentYear">
+          <el-input v-model="form.enrollmentYear" placeholder="请输入入学年份" />
         </el-form-item>
         <el-divider content-position="center">学生就业信息信息</el-divider>
         <el-row :gutter="10" class="mb8">
@@ -317,7 +329,20 @@ export default {
         enrollmentYear: null
       },
       // 表单参数
-      form: {},
+      form: {
+        id: null,
+        collegeId: null,
+        collegeName: null,
+        departmentId: null,
+        departmentName: null,
+        majorId: null,
+        majorName: null,
+        studentId: null,
+        studentName: null,
+        gender: null,
+        dateOfBirth: null,
+        enrollmentYear: null
+      },
       // 表单校验
       rules: {
         collegeId: [
@@ -344,6 +369,9 @@ export default {
         studentName: [
           { required: true, message: "学生姓名不能为空", trigger: "blur" }
         ],
+        enrollmentYear: [
+          { required: true, message: "入学年份不能为空", trigger: "blur" }
+        ]
       }
     };
   },
@@ -412,6 +440,7 @@ export default {
       const id = row.id || this.ids
       getDepartments_students(id).then(response => {
         this.form = response.data;
+        this.form.enrollmentYear = response.data.enrollmentYear; // 添加这一行
         this.employmentInfoList = response.data.employmentInfoList;
         this.open = true;
         this.title = "修改高校院系专业学生信息";
@@ -448,7 +477,7 @@ export default {
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
     },
-	/** 学生就业信息序号 */
+    /** 学生就业信息序号 */
     rowEmploymentInfoIndex({ row, rowIndex }) {
       row.index = rowIndex + 1;
     },
