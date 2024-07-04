@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.employment.mapper.EmploymentAnalysisMapper">
-    
+
     <resultMap type="EmploymentAnalysis" id="EmploymentAnalysisResult">
         <result property="analysisId"    column="analysis_id"    />
         <result property="studentId"    column="student_id"    />
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectEmploymentAnalysisList" parameterType="EmploymentAnalysis" resultMap="EmploymentAnalysisResult">
         <include refid="selectEmploymentAnalysisVo"/>
-        <where>  
+        <where>
             <if test="analysisId != null "> and analysis_id = #{analysisId}</if>
             <if test="studentId != null "> and student_id = #{studentId}</if>
             <if test="collegeName != null  and collegeName != ''"> and college_name like concat('%', #{collegeName}, '%')</if>
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="location != null  and location != ''"> and location = #{location}</if>
         </where>
     </select>
-    
+
     <select id="selectEmploymentAnalysisByAnalysisId" parameterType="Long" resultMap="EmploymentAnalysisResult">
         <include refid="selectEmploymentAnalysisVo"/>
         where analysis_id = #{analysisId}
@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteEmploymentAnalysisByAnalysisIds" parameterType="String">
-        delete from employment_analysis where analysis_id in 
+        delete from employment_analysis where analysis_id in
         <foreach item="analysisId" collection="array" open="(" separator="," close=")">
             #{analysisId}
         </foreach>
@@ -114,6 +114,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         GROUP BY location
         ORDER BY count DESC
     </select>
+
+    <select id="selectGender" resultType="java.util.Map">
+        SELECT gender, COUNT(*) as count
+        FROM employment_analysis
+        GROUP BY gender
+    </select>
+
 
 
 

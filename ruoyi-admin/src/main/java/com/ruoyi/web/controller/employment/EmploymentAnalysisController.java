@@ -24,7 +24,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 就业分析Controller
- * 
+ *
  * @author ruoyi
  * @date 2024-07-02
  */
@@ -92,6 +92,12 @@ public class EmploymentAnalysisController extends BaseController
     @GetMapping("/popularProvinces")
     public AjaxResult getPopularProvinces() {
         List<Map<String, Object>> data = employmentAnalysisService.getPopularProvinces();
+        return AjaxResult.success(data);
+    }
+
+    @GetMapping("/gender")
+    public AjaxResult getGender() {
+        List<Map<String, Object>> data = employmentAnalysisService.getGender();
         return AjaxResult.success(data);
     }
 

@@ -40,6 +40,14 @@
         </p>
 
         <p>
+          <!-- ECharts 图表 -->
+          <h2>热门就业方向</h2>
+          <div id="gg">
+            <EchartsGender />
+          </div>
+        </p>
+
+        <p>
           <el-button
             type="primary"
             size="mini"
@@ -70,6 +78,7 @@ import EChartsComponent from './EChartsComponent.vue';
 import PopularMajorsChart from './PopularMajorsChart.vue';
 import EchartsMap from './EchartsMap.vue';
 import PopularProvincesChart from './PopularProvincesChart.vue';
+import EchartsGender from './EchartsGender.vue';
 
 export default {
   name: "Index",
@@ -77,7 +86,8 @@ export default {
     EChartsComponent,
     PopularMajorsChart,
     EchartsMap,
-    PopularProvincesChart
+    PopularProvincesChart,
+    EchartsGender
   },
   data() {
     return {

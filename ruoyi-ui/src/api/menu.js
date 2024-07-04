@@ -22,3 +22,10 @@ export function getPopularProvinces() {
     method: 'get'
   });
 }
+
+export function getGender() {
+  return request({
+    url: '/employment/employment_analysis/gender',
+    method: 'get'
+  });
+}

@@ -62,6 +62,10 @@ public class EmploymentAnalysisServiceImpl implements IEmploymentAnalysisService
         return employmentAnalysisMapper.selectPopularProvinces();
     }
 
+    @Override
+    public List<Map<String, Object>> getGender() {
+        return employmentAnalysisMapper.selectGender();
+    }
 
 
 

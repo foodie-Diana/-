@@ -40,5 +40,7 @@ public interface IEmploymentAnalysisService
 
     public List<Map<String, Object>> getPopularProvinces();
 
+    public List<Map<String, Object>> getGender();
+
 
 }

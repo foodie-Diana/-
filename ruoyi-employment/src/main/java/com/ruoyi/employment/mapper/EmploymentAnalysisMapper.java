@@ -8,15 +8,15 @@ import org.apache.ibatis.annotations.MapKey;
 
 /**
  * 就业分析Mapper接口
- * 
+ *
  * @author ruoyi
  * @date 2024-07-02
  */
-public interface EmploymentAnalysisMapper 
+public interface EmploymentAnalysisMapper
 {
     /**
      * 查询就业分析
-     * 
+     *
      * @param analysisId 就业分析主键
      * @return 就业分析
      */
@@ -24,7 +24,7 @@ public interface EmploymentAnalysisMapper
 
     /**
      * 查询就业分析列表
-     * 
+     *
      * @param employmentAnalysis 就业分析
      * @return 就业分析集合
      */
@@ -32,7 +32,7 @@ public interface EmploymentAnalysisMapper
 
     /**
      * 新增就业分析
-     * 
+     *
      * @param employmentAnalysis 就业分析
      * @return 结果
      */
@@ -40,7 +40,7 @@ public interface EmploymentAnalysisMapper
 
     /**
      * 修改就业分析
-     * 
+     *
      * @param employmentAnalysis 就业分析
      * @return 结果
      */
@@ -48,7 +48,7 @@ public interface EmploymentAnalysisMapper
 
     /**
      * 删除就业分析
-     * 
+     *
      * @param analysisId 就业分析主键
      * @return 结果
      */
@@ -56,7 +56,7 @@ public interface EmploymentAnalysisMapper
 
     /**
      * 批量删除就业分析
-     * 
+     *
      * @param analysisIds 需要删除的数据主键集合
      * @return 结果
      */
@@ -87,5 +87,12 @@ public interface EmploymentAnalysisMapper
     @MapKey("location")
     public List<Map<String, Object>> selectPopularProvinces();
 
+    /**
+     * 查询各省份的就业人数
+     *
+     * @return 各省份的就业人数
+     */
+    @MapKey("gender")
+    public List<Map<String, Object>> selectGender();
 
 }
