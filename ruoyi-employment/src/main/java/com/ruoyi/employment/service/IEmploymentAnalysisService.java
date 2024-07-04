@@ -38,5 +38,7 @@ public interface IEmploymentAnalysisService
     public List<Map<String, Object>> getPopularMajors();
 
 
+    public List<Map<String, Object>> getPopularProvinces();
+
 
 }

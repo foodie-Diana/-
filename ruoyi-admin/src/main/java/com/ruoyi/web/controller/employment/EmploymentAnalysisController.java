@@ -89,4 +89,11 @@ public class EmploymentAnalysisController extends BaseController
         return AjaxResult.success(data);
     }
 
+    @GetMapping("/popularProvinces")
+    public AjaxResult getPopularProvinces() {
+        List<Map<String, Object>> data = employmentAnalysisService.getPopularProvinces();
+        return AjaxResult.success(data);
+    }
+
+
 }

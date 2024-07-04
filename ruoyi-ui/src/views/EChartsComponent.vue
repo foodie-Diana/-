@@ -10,36 +10,43 @@ import * as echarts from 'echarts'; // 确保导入 ECharts
 
 export default {
   name: 'EChartsComponent',
+  // 在组件挂载到 DOM 后立即执行
   async mounted() {
     console.log("EChartsComponent mounted");
+    // 调用初始化图表的异步方法
     await this.initChart();
   },
   methods: {
     async initChart() {
       console.log("Initializing chart...");
 
+      // 获取 DOM 元素来渲染图表
       const chartElement = document.getElementById('main');
       if (!chartElement) {
         console.error("Chart element not found!");
         return;
       }
 
-      // 如果 myChart 已经初始化，先销毁它
+      // 如果 myChart 已经初始化，先销毁它以避免重复初始化
       if (this.myChart) {
         this.myChart.dispose();
       }
 
+      // 初始化 ECharts 实例
       this.myChart = echarts.init(chartElement);
 
       console.log("Fetching data...");
+      // 调用后端 API 获取数据
       const response = await getCollegeYearlyAvgSalaries();
       console.log("Data fetched: ", response);
 
+      // 检查 API 调用是否成功
       if (response.code !== 200) {
         console.error("Failed to fetch data: ", response.message);
         return;
       }
 
+      // 提取返回的数据
       const rawData = response.data;
       console.log("Raw data: ", rawData);
 
@@ -51,12 +58,14 @@ export default {
         item.college_name // 索引 3
       ]);
 
+      // 获取所有的院校名称
       const colleges = Array.from(new Set(rawData.map(item => item.college_name)));
       console.log("Colleges: ", colleges);
 
       const datasetWithFilters = [];
       const seriesList = [];
 
+      // 为每个院校生成对应的数据集和系列
       colleges.forEach(college => {
         const datasetId = 'dataset_' + college;
         datasetWithFilters.push({
@@ -66,20 +75,21 @@ export default {
             type: 'filter',
             config: {
               and: [
-                { dimension: 1, gte: 2000 },
-                { dimension: 3, '=': college }
+                { dimension: 1, gte: 2000 }, // 过滤年份大于等于 2000 的数据
+                { dimension: 3, '=': college } // 过滤院校名称为当前院校的数据
               ]
             }
           }
         });
         seriesList.push({
-          type: 'line',
+          type: 'line', // 线图
           datasetId: datasetId,
           showSymbol: false,
           name: college,
           endLabel: {
             show: true,
             formatter: function (params) {
+              // 格式化最终标签
               return params.value[3] + ': ' + params.value[0];
             }
           },
@@ -101,6 +111,7 @@ export default {
 
       console.log("Series list: ", seriesList);
 
+      // 定义 ECharts 配置项
       const option = {
         animationDuration: 10000,
         dataset: [
@@ -132,11 +143,12 @@ export default {
 
       console.log("ECharts option: ", option);
 
+      // 设置 ECharts 配置项以生成图表
       this.myChart.setOption(option);
     }
   },
   beforeDestroy() {
-    // 销毁图表实例
+    // 在组件销毁前销毁图表实例
     if (this.myChart) {
       this.myChart.dispose();
     }

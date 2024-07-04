@@ -57,6 +57,13 @@ public class EmploymentAnalysisServiceImpl implements IEmploymentAnalysisService
         return employmentAnalysisMapper.selectPopularMajors();
     }
 
+    @Override
+    public List<Map<String, Object>> getPopularProvinces() {
+        return employmentAnalysisMapper.selectPopularProvinces();
+    }
+
+
+
 
 
 }

@@ -79,5 +79,13 @@ public interface EmploymentAnalysisMapper
     public List<Map<String, Object>> selectPopularMajors();
 
 
+    /**
+     * 查询各省份的就业人数
+     *
+     * @return 各省份的就业人数
+     */
+    @MapKey("location")
+    public List<Map<String, Object>> selectPopularProvinces();
+
 
 }

@@ -107,5 +107,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY major_count DESC
     </select>
 
+    <!-- 查询各省份的就业人数 -->
+    <select id="selectPopularProvinces" resultType="java.util.Map">
+        SELECT location, COUNT(*) as count
+        FROM employment_analysis
+        GROUP BY location
+        ORDER BY count DESC
+    </select>
+
+
+
+
+
+
 
 </mapper>
