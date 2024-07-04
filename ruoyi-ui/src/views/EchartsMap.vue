@@ -35,7 +35,6 @@ export default {
         this.mapData = validData.map(item => ({
           value: item.count,
           name: item.location
-
         }));
 
         this.points = validData.map(item => ({
@@ -124,6 +123,16 @@ export default {
             }
           }
         },
+        visualMap: {
+          min: 0,
+          max: Math.max(...this.mapData.map(item => item.value)),
+          text: ['High', 'Low'],
+          realtime: false,
+          calculable: true,
+          inRange: {
+            color: ['lightskyblue', 'yellow', 'orangered']
+          }
+        },
         geo: { // 地图配置
           map: 'china',
           label: { // 图形上的文本标签
@@ -144,10 +153,10 @@ export default {
               borderColor: '#1E90FF',
               borderWidth: 1,
               areaColor: { // 地图区域的颜色
-                type: 'radial', // 径向渐变
+               /* type: 'radial', // 径向渐变
                 x: 0.5, // 圆心
                 y: 0.5, // 圆心
-                r: 0.8, // 半径
+                r: 0.8, // 半径 */
                 colorStops: [
                   { // 0% 处的颜色
                     offset: 0,
@@ -174,7 +183,7 @@ export default {
             geoIndex: 0,
             data: this.mapData
           },
-          { // 散点系列数据
+         /* { // 散点系列数据
             type: 'effectScatter', // 带有涟漪特效动画的散点（气泡）图
             coordinateSystem: 'geo', // 该系列使用的坐标系:地理坐标系
             symbolSize: 12, // 散点大小
@@ -190,7 +199,7 @@ export default {
             },
             zlevel: 1, // 所有图形的 zlevel 值。
             data: this.points
-          },
+          }, */
           { // 线条系列数据
             type: 'lines',
             zlevel: 2,
@@ -226,7 +235,7 @@ export default {
 
 <style scoped>
 .content {
-  background-color: #f0f8ff; /* 浅蓝色背景 */
+  background-color: #ffffff; /* 浅蓝色背景 */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -235,6 +244,6 @@ export default {
 
 .chart-container {
   width: 100%;
-  height: 90vh; /* 高度设置为90%视口高度 */
+  height: 100vh; /* 高度设置为90%视口高度 */
 }
 </style>
