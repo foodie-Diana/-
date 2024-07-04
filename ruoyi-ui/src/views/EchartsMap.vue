@@ -103,7 +103,7 @@ export default {
     initCharts() {
       const charts = echarts.init(this.$refs['charts']);
       const option = {
-        backgroundColor: '#f0f8ff', // 浅蓝色背景颜色
+        backgroundColor: '#ffffff', // 浅蓝色背景颜色
         tooltip: {
           trigger: 'item', // 触发类型
           formatter: function (params) {
