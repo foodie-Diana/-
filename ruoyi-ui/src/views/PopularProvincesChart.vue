@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="popular-provinces-chart" style="width: 100%; height: 400px;"></div>
+    <div id="popular-provinces-chart" style="width: 100%; height: 700px;"></div>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
       console.log("Raw data: ", rawData);
 
       // 仅取前6个省份及其就业人数
-      rawData = rawData.slice(0, 6);
+      rawData = rawData.slice(0, 12);
 
 
       // 仅取前6个省份及其就业人数

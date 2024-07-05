@@ -1,42 +1,49 @@
-<template>
+<<template>
   <div class="app-container home">
     <el-row :gutter="20">
-      <el-col :sm="24" :lg="24">
+      <el-col :span="24">
         <hr />
       </el-col>
     </el-row>
 
     <el-row :gutter="20">
       <el-col :span="12">
-        <h2>高校就业分析平台</h2>
-      </el-col>
-    </el-row>
-
-    <el-row :gutter="10">
-      <el-col :span="6">
-        <!-- 各院校历年平均薪资图表 -->
-        <div id="main" class="chart-container">
-          <EChartsComponent />
-        </div>
-        <!-- 各省份就业人数图表 -->
-        <div id="popular-provinces-chart-container" class="chart-container">
-          <PopularProvincesChart />
+        <!-- 热门就业方向图表 -->
+        <div id="popular-majors-chart" class="chart-container">
+          <PopularMajorsChart />
         </div>
       </el-col>
       <el-col :span="12">
+        <!-- 就业人数男女比例图表 -->
+        <div id="gg" class="chart-container">
+          <EchartsGender />
+        </div>
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20">
+      <el-col :span="24">
         <!-- 各省份就业人数密度图表 -->
         <div id="echarts-map" class="large-chart-container">
           <EchartsMap />
         </div>
       </el-col>
-      <el-col :span="6">
-        <!-- 就业人数男女比例图表 -->
-        <div id="gg" class="chart-container">
-          <EchartsGender />
+    </el-row>
+
+    <el-row :gutter="20">
+      <el-col :span="24">
+        <!-- 各院校历年平均薪资图表 -->
+        <div id="main" class="large-chart-container">
+          <EChartsComponent />
         </div>
-        <!-- 热门就业方向图表 -->
-        <div id="popular-majors-chart" class="chart-container">
-          <PopularMajorsChart />
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="20">
+      <el-col :span="24">
+        <!-- 各省份就业人数图表 -->
+        <div id="popular-provinces-chart-container" class="extra-large-chart-container">
+          <PopularProvincesChart />
         </div>
       </el-col>
     </el-row>
@@ -79,6 +86,7 @@ export default {
 };
 </script>
 
+
 <style scoped lang="scss">
 .home {
   blockquote {
@@ -86,6 +94,8 @@ export default {
     margin: 0 0 2vw;
     font-size: 1.75vw;
     border-left: 0.5vw solid #eee;
+    background-color: #f9f9f9;
+    border-radius: 0.5vw;
   }
   hr {
     margin-top: 2vw;
@@ -100,16 +110,13 @@ export default {
   ul {
     padding: 0;
     margin: 0;
+    list-style-type: none;
   }
 
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.3vw;
   color: #676a6c;
   overflow-x: hidden;
-
-  ul {
-    list-style-type: none;
-  }
 
   h4 {
     margin-top: 0;
@@ -123,10 +130,7 @@ export default {
 
   p {
     margin-top: 1vw;
-
-    b {
-      font-weight: 700;
-    }
+    line-height: 1.5;
   }
 
   .update-log {
@@ -140,15 +144,42 @@ export default {
       padding-inline-start: 4vw;
     }
   }
+
+  .el-button {
+    background-color: #42b983;
+    border-color: #42b983;
+    color: #fff;
+    &:hover {
+      background-color: #3a9c74;
+      border-color: #3a9c74;
+    }
+  }
 }
 
-.chart-container {
+.chart-container,
+.large-chart-container,
+.extra-large-chart-container {
   width: 100%;
-  height: 40vh; /* 使用视口高度单位 */
+  height: 40vh;
+  background-color: #fff;
+  border-radius: 0.5vw;
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.1);
+  padding: 1vw;
+  margin-bottom: 2vw;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* 添加平滑过渡效果 */
+
+  &:hover {
+    transform: translateY(-0.5vw); /* 容器上移 */
+    box-shadow: 0 1vw 2vw rgba(0, 0, 0, 0.2); /* 增加阴影 */
+  }
 }
 
 .large-chart-container {
-  width: 100%;
-  height: 80vh; /* 使用视口高度单位 */
+  height: 80vh; /* 调整高度 */
+}
+
+.extra-large-chart-container {
+  height: 100vh; /* 更大一些 */
 }
 </style>
+

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="gender-pie-chart" style="width: 100%; height: 400px;"></div>
+    <div id="gender-pie-chart" style="width: 100%; height: 300px;"></div>
   </div>
 </template>
 

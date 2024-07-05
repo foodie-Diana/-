@@ -246,6 +246,6 @@ export default {
 
 .chart-container {
   width: 100%;
-  height: 100vh; /* 高度设置为90%视口高度 */
+  height: 90vh; /* 高度设置为90%视口高度 */
 }
 </style>

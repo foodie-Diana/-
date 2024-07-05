@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="popularMajorsChart" style="width: 100%; height: 400px;"></div>
+    <div id="popularMajorsChart" style="width: 100%; height: 280px;"></div>
   </div>
 </template>
 
