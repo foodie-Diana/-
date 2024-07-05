@@ -120,9 +120,8 @@
     </el-dialog>
 
     <!-- ECharts 图表 -->
-    <h2>ECharts图表</h2>
     <!-- ECharts 图表 -->
-    <div id="main" style="width: 100%; height: 400px;">
+    <div id="main1" style="width: 100%; height: 400px;">
       <!-- ECharts 组件 -->
           <EChartsComponent />
     </div>
@@ -196,7 +195,7 @@ export default {
   },
   created() {
     this.getList();
-    this.initChart();
+
   },
   methods: {
     /** 查询就业分析列表 */
