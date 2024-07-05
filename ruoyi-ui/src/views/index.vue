@@ -25,7 +25,7 @@
 
         <p>
           <!-- ECharts 图表 -->
-          <h2>热门就业方向</h2>
+          <h2>各省份就业人数密度</h2>
           <div id="echarts-map">
             <EchartsMap />
           </div>
@@ -41,7 +41,7 @@
 
         <p>
           <!-- ECharts 图表 -->
-          <h2>热门就业方向</h2>
+          <h2>就业人数男女比例</h2>
           <div id="gg">
             <EchartsGender />
           </div>
@@ -61,15 +61,7 @@
 
     </el-row>
     <el-divider />
-    <el-row :gutter="20">
-      <el-col :xs="24" :sm="24" :md="12" :lg="8">
-        <el-card class="update-log">
-          <div slot="header" class="clearfix">
-            <span>更新日志</span>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+
   </div>
 </template>
 
