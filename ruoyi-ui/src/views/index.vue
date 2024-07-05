@@ -5,63 +5,53 @@
         <hr />
       </el-col>
     </el-row>
-    <el-row :gutter="20">
-      <el-col :sm="24" :lg="12" style="padding-left: 20px">
 
+    <el-row :gutter="20">
+      <el-col :span="12">
         <h2>高校就业分析平台</h2>
-        <!-- ECharts 图表 -->
+      </el-col>
+    </el-row>
+
+    <el-row :gutter="10">
+      <el-col :span="6">
+        <!-- 热门就业方向图表 -->
+        <div id="popular-majors-chart" style="width: 100%; height: 450px;">
+          <PopularMajorsChart />
+        </div>
+        <!-- 各省份就业人数图表 -->
+        <div id="popular-provinces-chart-container" style="width: 100%; height: 400px;">
+          <PopularProvincesChart />
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <!-- 各省份就业人数密度图表 -->
+        <div id="echarts-map" style="width: 100%; height: 800px;">
+          <EchartsMap />
+        </div>
+      </el-col>
+      <el-col :span="6">
+        <!-- 就业人数男女比例图表 -->
+        <div id="gg" style="width: 100%; height: 470px;">
+          <EchartsGender />
+        </div>
+        <!-- 各院校历年平均薪资图表 -->
         <div id="main" style="width: 100%; height: 400px;">
           <EChartsComponent />
         </div>
-
-
-        <p>
-          <!-- ECharts 图表 -->
-          <h2>热门就业方向</h2>
-          <div id="popular-majors-chart" style="width: 100%; height: 400px;">
-            <PopularMajorsChart />
-          </div>
-        </p>
-
-        <p>
-          <!-- ECharts 图表 -->
-          <h2>各省份就业人数密度</h2>
-          <div id="echarts-map">
-            <EchartsMap />
-          </div>
-        </p>
-
-        <p>
-          <!-- ECharts 图表 -->
-          <h2>各省份就业人数</h2>
-          <div id="popular-provinces-chart-container" style="width: 100%; height: 400px;">
-            <PopularProvincesChart />
-          </div>
-        </p>
-
-        <p>
-          <!-- ECharts 图表 -->
-          <h2>就业人数男女比例</h2>
-          <div id="gg">
-            <EchartsGender />
-          </div>
-        </p>
-
-        <p>
-          <el-button
-            type="primary"
-            size="mini"
-            icon="el-icon-cloudy"
-            plain
-            @click="goTarget('https://gitee.com/foodie_diana/stephen-planning-bureau')"
-            >项目源码</el-button
-          >
-        </p>
       </el-col>
-
     </el-row>
-    <el-divider />
 
+    <el-row :gutter="20">
+      <el-col :sm="24" :lg="24">
+        <el-button
+          type="primary"
+          size="mini"
+          icon="el-icon-cloudy"
+          plain
+          @click="goTarget('https://gitee.com/foodie_diana/stephen-planning-bureau')"
+        >项目源码</el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -80,14 +70,6 @@ export default {
     EchartsMap,
     PopularProvincesChart,
     EchartsGender
-  },
-  data() {
-    return {
-      version: "3.8.7"
-    };
-  },
-  created() {
-    // Initialize charts if needed here
   },
   methods: {
     goTarget(href) {

@@ -124,6 +124,8 @@ export default {
           }
         },
         visualMap: {
+          left: '20%',   // 将 left 属性调整为百分比或具体数值
+          bottom: '20%', // 将 bottom 属性调整为百分比或具体数值
           min: 0,
           max: Math.max(...this.mapData.map(item => item.value)),
           text: ['High', 'Low'],
@@ -236,7 +238,7 @@ export default {
 <style scoped>
 .content {
   background-color: #ffffff; /* 浅蓝色背景 */
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;

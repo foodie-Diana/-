@@ -66,6 +66,9 @@ export default {
           bottom: '3%',
           containLabel: true
         },
+        title: {
+          text: '热门就业省份'
+        },
         xAxis: {
           type: 'value'
         },

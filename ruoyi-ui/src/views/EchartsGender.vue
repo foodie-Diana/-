@@ -53,7 +53,7 @@ export default {
           trigger: 'item'
         },
         legend: {
-          top: '5%',
+          top: '6%',
           left: 'center'
         },
         series: [
@@ -70,6 +70,9 @@ export default {
             label: {
               show: false,
               position: 'center'
+            },
+            title: {
+              text: '各院校历年平均薪资'
             },
             emphasis: {
               label: {
