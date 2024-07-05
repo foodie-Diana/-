@@ -14,29 +14,29 @@
 
     <el-row :gutter="10">
       <el-col :span="6">
-        <!-- 热门就业方向图表 -->
-        <div id="popular-majors-chart" style="width: 100%; height: 450px;">
-          <PopularMajorsChart />
+        <!-- 各院校历年平均薪资图表 -->
+        <div id="main" class="chart-container">
+          <EChartsComponent />
         </div>
         <!-- 各省份就业人数图表 -->
-        <div id="popular-provinces-chart-container" style="width: 100%; height: 400px;">
+        <div id="popular-provinces-chart-container" class="chart-container">
           <PopularProvincesChart />
         </div>
       </el-col>
       <el-col :span="12">
         <!-- 各省份就业人数密度图表 -->
-        <div id="echarts-map" style="width: 100%; height: 800px;">
+        <div id="echarts-map" class="large-chart-container">
           <EchartsMap />
         </div>
       </el-col>
       <el-col :span="6">
         <!-- 就业人数男女比例图表 -->
-        <div id="gg" style="width: 100%; height: 470px;">
+        <div id="gg" class="chart-container">
           <EchartsGender />
         </div>
-        <!-- 各院校历年平均薪资图表 -->
-        <div id="main" style="width: 100%; height: 400px;">
-          <EChartsComponent />
+        <!-- 热门就业方向图表 -->
+        <div id="popular-majors-chart" class="chart-container">
+          <PopularMajorsChart />
         </div>
       </el-col>
     </el-row>
@@ -82,19 +82,19 @@ export default {
 <style scoped lang="scss">
 .home {
   blockquote {
-    padding: 10px 20px;
-    margin: 0 0 20px;
-    font-size: 17.5px;
-    border-left: 5px solid #eee;
+    padding: 1vw 2vw;
+    margin: 0 0 2vw;
+    font-size: 1.75vw;
+    border-left: 0.5vw solid #eee;
   }
   hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
     border: 0;
-    border-top: 1px solid #eee;
+    border-top: 0.1vw solid #eee;
   }
   .col-item {
-    margin-bottom: 20px;
+    margin-bottom: 2vw;
   }
 
   ul {
@@ -103,7 +103,7 @@ export default {
   }
 
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 1.3vw;
   color: #676a6c;
   overflow-x: hidden;
 
@@ -112,17 +112,17 @@ export default {
   }
 
   h4 {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   h2 {
-    margin-top: 10px;
-    font-size: 26px;
+    margin-top: 1vw;
+    font-size: 2.6vw;
     font-weight: 100;
   }
 
   p {
-    margin-top: 10px;
+    margin-top: 1vw;
 
     b {
       font-weight: 700;
@@ -137,8 +137,18 @@ export default {
       margin-block-end: 1em;
       margin-inline-start: 0;
       margin-inline-end: 0;
-      padding-inline-start: 40px;
+      padding-inline-start: 4vw;
     }
   }
+}
+
+.chart-container {
+  width: 100%;
+  height: 40vh; /* 使用视口高度单位 */
+}
+
+.large-chart-container {
+  width: 100%;
+  height: 80vh; /* 使用视口高度单位 */
 }
 </style>

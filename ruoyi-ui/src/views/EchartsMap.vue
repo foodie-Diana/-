@@ -238,7 +238,7 @@ export default {
 <style scoped>
 .content {
   background-color: #ffffff; /* 浅蓝色背景 */
-  height: 70vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
