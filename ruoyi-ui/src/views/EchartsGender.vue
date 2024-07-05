@@ -49,6 +49,10 @@ export default {
       }));
 
       const option = {
+        title: {
+          text: '男女比例',
+          left: 'center'
+        },
         tooltip: {
           trigger: 'item'
         },
@@ -70,9 +74,6 @@ export default {
             label: {
               show: false,
               position: 'center'
-            },
-            title: {
-              text: '各院校历年平均薪资'
             },
             emphasis: {
               label: {
