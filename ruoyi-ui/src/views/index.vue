@@ -1,7 +1,8 @@
-<<template>
+<template>
   <div class="app-container home">
     <el-row :gutter="20">
       <el-col :span="24">
+        <h1>大学生就业分析平台</h1>
         <hr />
       </el-col>
     </el-row>
@@ -20,7 +21,6 @@
         </div>
       </el-col>
     </el-row>
-
     <el-row :gutter="20">
       <el-col :span="24">
         <!-- 各省份就业人数密度图表 -->
@@ -29,7 +29,6 @@
         </div>
       </el-col>
     </el-row>
-
     <el-row :gutter="20">
       <el-col :span="24">
         <!-- 各院校历年平均薪资图表 -->
@@ -38,7 +37,6 @@
         </div>
       </el-col>
     </el-row>
-
     <el-row :gutter="20">
       <el-col :span="24">
         <!-- 各省份就业人数图表 -->
@@ -47,7 +45,6 @@
         </div>
       </el-col>
     </el-row>
-
     <el-row :gutter="20">
       <el-col :sm="24" :lg="24">
         <el-button
@@ -68,7 +65,6 @@ import PopularMajorsChart from './PopularMajorsChart.vue';
 import EchartsMap from './EchartsMap.vue';
 import PopularProvincesChart from './PopularProvincesChart.vue';
 import EchartsGender from './EchartsGender.vue';
-
 export default {
   name: "Index",
   components: {
@@ -85,7 +81,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped lang="scss">
 .home {
@@ -117,6 +112,13 @@ export default {
   font-size: 1.3vw;
   color: #676a6c;
   overflow-x: hidden;
+
+  h1 {
+    font-size: 3vw;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 2vw;
+  }
 
   h4 {
     margin-top: 0;
@@ -182,4 +184,3 @@ export default {
   height: 100vh; /* 更大一些 */
 }
 </style>
-

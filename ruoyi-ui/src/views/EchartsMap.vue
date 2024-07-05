@@ -103,6 +103,11 @@ export default {
     initCharts() {
       const charts = echarts.init(this.$refs['charts']);
       const option = {
+        title: {
+          text: '各省份就业人口密度',
+          left: 'center',
+          top: '12%'
+        },
         backgroundColor: 'transparent', // 透明背景颜色
         tooltip: {
           trigger: 'item', // 触发类型
