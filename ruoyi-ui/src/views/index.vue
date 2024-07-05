@@ -1,9 +1,14 @@
-<<template>
+<template>
   <div class="app-container home">
-    <el-row :gutter="20">
+    <el-row justify="center">
       <el-col :span="24">
-        <hr />
+       <hr />
+        <div class="title-container">
+          <h1 class="main-title">大学生就业分析平台</h1>
+        </div>
+
       </el-col>
+
     </el-row>
 
     <el-row :gutter="20">
@@ -86,7 +91,6 @@ export default {
 };
 </script>
 
-
 <style scoped lang="scss">
 .home {
   blockquote {
@@ -156,6 +160,10 @@ export default {
   }
 }
 
+.title-container {
+  text-align: center;
+}
+
 .chart-container,
 .large-chart-container,
 .extra-large-chart-container {
@@ -181,5 +189,37 @@ export default {
 .extra-large-chart-container {
   height: 100vh; /* 更大一些 */
 }
-</style>
 
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.el-col {
+  border-radius: 4px;
+}
+
+.bg-purple-dark {
+  background: #99a9bf;
+}
+
+.bg-purple {
+  background: #d3dce6;
+}
+
+.bg-purple-light {
+  background: #e5e9f2;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+</style>

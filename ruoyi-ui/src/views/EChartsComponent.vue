@@ -113,7 +113,7 @@ export default {
 
       // 定义 ECharts 配置项
       const option = {
-        animationDuration: 10000,
+        animationDuration: 15000,
         dataset: [
           {
             id: 'dataset_raw',
@@ -146,6 +146,7 @@ export default {
       // 设置 ECharts 配置项以生成图表
       this.myChart.setOption(option);
     }
+
   },
   beforeDestroy() {
     // 在组件销毁前销毁图表实例
