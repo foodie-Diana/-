@@ -229,51 +229,6 @@
         <el-form-item label="入学年份" prop="enrollmentYear">
           <el-input v-model="form.enrollmentYear" placeholder="请输入入学年份" />
         </el-form-item>
-        <el-divider content-position="center">学生就业信息信息</el-divider>
-        <el-row :gutter="10" class="mb8">
-          <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAddEmploymentInfo">添加</el-button>
-          </el-col>
-          <el-col :span="1.5">
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDeleteEmploymentInfo">删除</el-button>
-          </el-col>
-        </el-row>
-        <el-table :data="employmentInfoList" :row-class-name="rowEmploymentInfoIndex" @selection-change="handleEmploymentInfoSelectionChange" ref="employmentInfo">
-          <el-table-column type="selection" width="50" align="center" />
-          <el-table-column label="序号" align="center" prop="index" width="50"/>
-          <el-table-column label="公司名称" prop="companyName" width="150">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.companyName" placeholder="请输入公司名称" />
-            </template>
-          </el-table-column>
-          <el-table-column label="职位" prop="position" width="150">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.position" placeholder="请输入职位" />
-            </template>
-          </el-table-column>
-          <el-table-column label="薪资" prop="salary" width="150">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.salary" placeholder="请输入薪资" />
-            </template>
-          </el-table-column>
-          <el-table-column label="就业日期" prop="employmentDate" width="240">
-            <template slot-scope="scope">
-              <el-date-picker clearable v-model="scope.row.employmentDate" type="date" value-format="yyyy-MM-dd" placeholder="请选择就业日期" />
-            </template>
-          </el-table-column>
-          <el-table-column label="工作地点" prop="location" width="150">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.location" placeholder="请输入工作地点" />
-            </template>
-          </el-table-column>
-          <el-table-column label="就业状态" prop="status" width="150">
-            <template slot-scope="scope">
-              <el-select v-model="scope.row.status" placeholder="请选择就业状态">
-                <el-option label="请选择字典生成" value="" />
-              </el-select>
-            </template>
-          </el-table-column>
-        </el-table>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
