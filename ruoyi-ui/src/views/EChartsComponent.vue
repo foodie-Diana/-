@@ -113,7 +113,7 @@ export default {
 
       // 定义 ECharts 配置项
       const option = {
-        animationDuration: 15000,
+        animationDuration: 10000,
         dataset: [
           {
             id: 'dataset_raw',
